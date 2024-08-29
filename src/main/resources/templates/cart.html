@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:replace="fragments/links"></div>
+<script
+	src="https://www.paypal.com/sdk/js?client-id=AUVuPd4AMgU9NBz_jZf9Odgi__rwclPfh8ZAUSvS8kzygDnFcj4CZP-BCXHiU0W_4U7mOB_9bIBA7s9t&currency=SGD&components=buttons"></script>
+
+<body>
+	<div th:replace="fragments/header"></div>
+	<div th:replace="fragments/search"></div>
+
+
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p style="background-color: white;">Console Rescue</p>
+						<h1>Shopping Cart</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- cart -->
+	<div class="cart-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-12">
+					<div class="cart-table-wrap">
+						<table class="cart-table">
+							<thead class="cart-table-head">
+								<tr class="table-head-row">
+									<th class="product-remove"></th>
+									<th class="product-image">Product Image</th>
+									<th class="product-name">Name</th>
+									<th class="product-price">Price</th>
+									<th class="product-quantity">Quantity</th>
+									<th class="product-total">SubTotal</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="table-body-row" th:each="cartItem : ${cartItemList}">
+									<td class="product-remove"><a
+										th:href="@{/cart/remove/{id}(id= ${cartItem.id})}"><i
+											class="far fa-window-close"></i></a></td>
+									<td class="product-img"><img
+										th:src="@{/uploads/items/{id}/{imageName}(id=${cartItem.item.id}, imageName=${cartItem.item.imgName})}"
+										alt=""></td>
+									<td class="product-name"><a
+										th:href="@{/items/{id}(id=${cartItem.item.id})}"
+										th:text="${cartItem.item.name}"></a></td>
+									<td class="product-price" th:text="'$'+${cartItem.item.price}"></td>
+									<td class="product-quantity"><form
+											class="needs-validation" novalidate
+											th:action="@{/cart/update/{id}(id=${cartItem.id})}"
+											method="post">
+											<!-- Other form fields... -->
+
+											<div class="mb-2 col-5">
+												<label for="quantity" class="form-label">Quantity</label> <input
+													id="quantity" type="number" name="qty" class="form-control"
+													th:value="${cartItem.quantity}" min="1" required />
+												<div class="invalid-feedback">Please enter a valid
+													quantity</div>
+
+												<!-- Display error message if the quantity exceeds the available quantity -->
+												<p class="text-danger" th:if="${quantityError}">Quantity
+													cannot exceed available quantity.</p>
+											</div>
+
+											<button class="cart-buttons">Update Cart</button>
+										</form></td>
+									<td class="product-total" th:text="'$'+${cartItem.subTotal}"></td>
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="total-section">
+						<table class="total-table">
+							<thead class="total-table-head">
+								<tr class="table-total-row">
+									<th>Total</th>
+									<th>Price</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="total-data" th:each="cartItem : ${cartItemList}">
+									<td th:text="${cartItem.item.name + ' x ' + cartItem.quantity}"><strong>Subtotal:
+									</strong></td>
+									<td th:if="${cartItem != null}"
+										th:text="'$'+${cartItem.subTotal}"></td>
+								</tr>
+								<tr class="total-data">
+									<td><strong>Total: </strong></td>
+									<td id="Total" th:text="'$' + ${cartTotal}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div th:replace="fragments/paypal"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- end cart -->
+
+	<div th:replace="fragments/footer"></div>
+	<div th:replace="fragments/query"></div>
+
+</body>
+</html>

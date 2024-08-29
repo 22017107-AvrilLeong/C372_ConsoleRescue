@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/links"></div>
+
+<body>
+	<div th:replace="fragments/header"></div>
+	<div th:replace="fragments/search"></div>
+
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p style="background-color: white;">Console Rescue</p>
+						<h1>403 - Unauthorised</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+	<!-- error section -->
+	<div class="full-height-section error-section">
+		<div class="full-height-tablecell">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 offset-lg-2 text-center">
+						<div class="error-text">
+							<i class="far fa-sad-cry"></i>
+							<h1>Oops!</h1>
+							<p>YOU ARE NOT AUTHORISED TO BE HERE!</p>
+							<a href="/" class="boxed-btn">Back to Home</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end error section -->
+
+	<div th:replace="fragments/footer"></div>
+	<div th:replace="fragments/query"></div>
+
+</body>
+</html>

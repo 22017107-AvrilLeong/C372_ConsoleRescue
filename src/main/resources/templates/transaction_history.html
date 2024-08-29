@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:replace="fragments/links"></div>
+
+<body>
+	<div th:replace="fragments/header"></div>
+	<div th:replace="fragments/search"></div>
+
+
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p style="background-color: white;">Console Rescue</p>
+						<h1>Transaction History</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+	<main>
+		<!-- Transaction history -->
+		<div class="col-lg-12">
+			<div class="container border p-3" style="background-color: #f8f9fa;">
+				<div class="row m-3"></div>
+				<!-- Transaction rows -->
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Order ID</th>
+							<th>Transaction ID</th>
+							<th>Item</th>
+							<th>Price</th>
+							<th>Quantity</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="orderItem : ${orderItemList}">
+							<td th:text="${orderItem.orderId}"></td>
+							<td th:text="${orderItem.transactionId}"></td>
+							<td>
+								<h5 th:text="${orderItem.item.name}"></h5>
+								<p th:text="${orderItem.item.description}"></p> <img
+								width="100px"
+								th:src="@{/uploads/items/{id}/{imageName}(id=${orderItem.item.id}, imageName=${orderItem.item.imgName})}">
+							</td>
+							<td th:text="'$'+${orderItem.item.price}"></td>
+							<td th:text="${orderItem.quantity}"></td>
+							<td th:text="'$'+${orderItem.item.price * orderItem.quantity}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</main>
+	<div th:replace="fragments/footer"></div>
+	<div th:replace="fragments/query"></div>
+</body>
+</html>

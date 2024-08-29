@@ -1,0 +1,66 @@
+
+<!-- header -->
+<div class="top-header-area" id="sticker">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-sm-12 text-center">
+				<div class="main-menu-wrap">
+					<!-- logo -->
+					<div class="site-logo">
+						<a href="/"> <img src="/images/logo.png" alt="">
+						</a>
+					</div>
+					<!-- logo -->
+
+					<!-- menu start -->
+					<nav class="main-menu">
+						<ul>
+							<li class="current-list-item"><a href="/">Home</a></li>
+							<li><a href="/shop">Shop</a>
+								<ul class="sub-menu" sec:authorize="hasRole('ROLE_ADMIN')">
+									<li><a href="/categories">Categories</a></li>
+									<li><a href="/items">Items</a></li>
+									<li><a href="/members">Members</a></li>
+								</ul></li>
+							<li><a href="/about">About</a></li>
+							<li><a href="/contact">Contact</a></li>
+							<li sec:authorize="isAuthenticated()"><a href="#">Account</a>
+								<ul class="sub-menu">
+									<li><a href="/account">Personal Details</a></li>
+									<li><a href="/transaction">Transaction History</a></li>
+
+								</ul></li>
+							<li><a sec:authorize="!isAuthenticated()" class="nav-link"
+								href="/login">Login</a>
+								<form sec:authorize="isAuthenticated()" th:action="@{/logout}"
+									method="post" class="">
+									<button class="btn nav-link logout-button" type="submit"
+										style="color: #FFCD66;">Logout</button>
+								</form></li>
+
+							<li>
+								<div class="header-icons">
+									<a class="shopping-cart" sec:authorize="isAuthenticated()"
+										href="/cart"><i class="fas fa-shopping-cart"></i></a> <a
+										class="mobile-show search-bar-icon" href="#"><i
+										class="fas fa-search"></i></a>
+								</div>
+							</li>
+						</ul>
+						<!-- User authentication section -->
+						<div sec:authorize="isAuthenticated()">
+							<h4 class="text-center" style="color: white;">
+								Hello, <span sec:authentication="principal.username"
+									style="font-weight: bold; color: #FFCD66;"></span>
+							</h4>
+						</div>
+					</nav>
+
+					<div class="mobile-menu"></div>
+					<!-- menu end -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end header -->

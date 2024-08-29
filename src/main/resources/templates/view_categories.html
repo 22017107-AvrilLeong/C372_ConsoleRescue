@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/links"></div>
+
+<body>
+	<div th:replace="fragments/header"></div>
+
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p style="background-color: white;">Console Rescue</p>
+						<h1>View All Categories</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<div class="container">
+		<table class="table bordered text-center">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Category</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="category :${listCategories}">
+					<tr>
+						<td th:text=${category.id}></td>
+						<td th:text=${category.name}></td>
+						<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+							th:href="@{/categories/edit/{id}(id= ${category.id})}"> Edit
+								| </a> <a th:href="@{/categories/delete/{id}(id= ${category.id})}">
+								Delete</a></td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+		<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/categories/add}"
+			class="btn btn-primary mb-3">Add Category</a>
+
+	</div>
+	<div th:replace="fragments/footer"></div>
+	<div th:replace="fragments/query"></div>
+
+
+</body>
+</html>
+
+

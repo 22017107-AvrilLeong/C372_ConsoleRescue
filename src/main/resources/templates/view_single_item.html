@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/links"></div>
+
+<body>
+	<div th:replace="fragments/header"></div>
+	<div th:replace="fragments/search"></div>
+
+
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>See more Details</p>
+						<h1>Single Product</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- single product -->
+	<div class="single-product mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="single-product-img">
+						<img
+							th:src="@{/uploads/items/{id}/{imageName} (id=${item.id}, imageName=${item.imgName})}"
+							alt="">
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div class="single-product-content">
+						<h3 th:text="${item.name}"></h3>
+						<p class="single-product-pricing" th:text="'$'+${item.price}"></p>
+						<p th:text="${item.description}"></p>
+						<div class="single-product-form">
+							<form class="needs-validation" novalidate
+								th:action="@{/cart/add/{itemId}(itemId = ${item.id})}"
+								method="post">
+								<input type="number" name="quantity" th:value=1>
+								<p>
+									Quantity available: <span th:text="${item.quantity}"></span>
+								</p>
+								<button type="submit" class="cart-btn">
+									<i class="fas fa-shopping-cart"></i>Add to Cart
+								</button>
+							</form>
+
+							<p>
+								<strong> Categories: <span
+									th:text="${item.category.name}"></span></strong>
+							</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end single product -->
+
+
+	<div th:replace="fragments/footer"></div>
+	<div th:replace="fragments/query"></div>
+
+</body>
+</html>

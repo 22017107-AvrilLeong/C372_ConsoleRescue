@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/links"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"></div>
+
+<body>
+	<div th:replace="fragments/header"></div>
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p style="background-color: white;">Admins Only</p>
+						<h1>Add Items</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- Add section -->
+	<div class="checkout-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="checkout-accordion-wrap">
+						<div class="accordion" id="accordionExample">
+							<div class="card single-accordion">
+								<div class="card-header" id="headingOne">
+									<h5 class="mb-0">
+										<button class="btn btn-link" type="button"
+											data-toggle="collapse" data-target="#collapseOne"
+											aria-expanded="true" aria-controls="collapseOne">
+											Add Item</button>
+									</h5>
+								</div>
+
+								<div id="collapseOne" class="collapse show"
+									aria-labelledby="headingOne" data-parent="#accordionExample">
+									<div class="card-body">
+										<div class="billing-address-form">
+
+
+											<form class="needs-validation" novalidate
+												th:action="@{/items/save}" th:object="${item}" method="post"
+												enctype="multipart/form-data">
+												<div class="mb-3 col-5">
+													<label for="item_name" class="form-label">Name</label> <input
+														id="item_name" class="form-control" type="text"
+														th:field="*{name}" required minlength=5 maxlength=50>
+													<div class="invalid-feedback">Please enter a valid
+														item name</div>
+													<p class="text-danger" th:if="${#fields.hasErrors('name')}"
+														th:errors="*{name}"></p>
+												</div>
+
+												<div class="mb-3 col-5">
+													<label for="item_description" class="form-label">Description</label>
+													<input id="item_description" class="form-control"
+														type="text" th:field="*{description}" required minlength=5
+														maxlength=100>
+													<div class="invalid-feedback">Please enter a valid
+														item description</div>
+													<p class="text-danger"
+														th:if="${#fields.hasErrors('description')}"
+														th:errors="*{description}"></p>
+
+												</div>
+
+												<div class="mb-3 col-5">
+													<label for="item_price" class="form-label">Price</label> <input
+														id="item_price" class="form-control" type="number"
+														required min=0 step="0.10" th:field="*{price}">
+													<div class="invalid-feedback">Please enter a valid
+														item price</div>
+													<p class="text-danger"
+														th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
+												</div>
+
+												<div class="mb-3 col-5">
+													<label for="item_quantity" class="form-label">Quantity</label>
+													<input id="item_quantity" class="form-control"
+														type="number" required min=0 th:field="*{quantity}">
+													<div class="invalid-feedback">Please enter a valid
+														item quantity</div>
+													<p class="text-danger"
+														th:if="${#fields.hasErrors('quantity')}"
+														th:errors="*{quantity}"></p>
+												</div>
+
+
+												<div class="mb-3 col-5">
+													<label for="item_category" class="form-label">
+														Category: </label> <select th:field="*{category}"
+														class="form-select">
+														<option value="" disabled selected>Choose a
+															category</option>
+														<option th:each="cat: ${catList}" th:value="${cat.id}"
+															th:text="${cat.name}"></option>
+													</select>
+													<div class="invalid-feedback">Please select a
+														category</div>
+													<p class="text-danger"
+														th:if="${#fields.hasErrors('category')}"
+														th:errors="*{category}"></p>
+												</div>
+
+												<div class="mb-3 col-5">
+													<label for="item_image" class="form-label"> Item
+														image:</label><input id="item_image" type="file" name="itemImage"
+														class="form-control" accept="image/png, image/jpeg" />
+												</div>
+												<div class="mt-5">
+													<input type="submit" value="Add Item">
+												</div>
+
+
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Form Validation -->
+		<script>
+			'use strict'
+
+			var form = document.querySelector('.needs-validation')
+
+			form.addEventListener('submit', function(event) {
+				if (!form.checkValidity()) {
+					event.preventDefault()
+					event.stopPropagation()
+				}
+
+				form.classList.add('was-validated')
+			})
+		</script>
+	</div>
+
+	<!-- End Form Validation -->
+	<div th:replace="fragments/footer"></div>
+	<div th:replace="fragments/query"></div>
+</body>
+</html>

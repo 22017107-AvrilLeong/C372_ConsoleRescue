@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/links"></div>
+
+<body>
+	<div th:replace="fragments/header"></div>
+	<div th:replace="fragments/search"></div>
+
+
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p style="background-color: white;">Console Rescue</p>
+						<h1>View All Members</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+	<main>
+		<div class="container">
+			<div class="alert alert-primary" role="alert" th:text="${success}"
+				th:if="${success}"></div>
+			<table class="table bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Username</th>
+						<th>Email</th>
+						<th>Role</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="member : ${listMembers}">
+						<td th:text="${member.id}"></td>
+						<td th:name="${member.name}"></td>
+						<!-- <td><a th:href=@{/items/member/{id}(id=${member.id})}>[[${member.name}]]</a></td> -->
+						<td><a
+							th:href="@{/member/transaction/{id}(id=${member.id})}"
+							th:text="${member.username}"></a></td>
+						<td th:text="${member.email}"></td>
+						<td th:text="${member.role}"></td>
+
+						<td><a th:href="@{/members/edit/{id}(id=${member.id})}">Edit</a>
+							| <a th:href="@{/members/delete/{id}(id=${member.id})}">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="/members/add" class="btn btn-primary">Add Member</a>
+		</div>
+
+
+	</main>
+</body>
+<div th:replace="fragments/footer"></div>
+
+</html>
+

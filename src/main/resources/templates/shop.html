@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/links"></div>
+<body>
+	<div th:replace="fragments/header"></div>
+	<div th:replace="fragments/search"></div>
+
+
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p style="background-color: white;">Console Rescue</p>
+						<h1>Shop Our Products</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section 
+
+	<!-- products -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+			<div class="row product-lists">
+				<th:block th:each="item : ${listItems}">
+					<div class="col-lg-4 col-md-6 text-center strawberry">
+						<div class="single-product-item">
+							<div class="product-image">
+								<a th:href="@{/items/{id}(id=${item.id})}"><img
+									th:src="@{/uploads/items/{id}/{imageName}(id=${item.id}, imageName=${item.imgName})}"
+									alt=""></a>
+							</div>
+							<h3 th:text="${item.name}"></h3>
+							<p th:text="${item.description}"></p>
+							<p class="product-price">
+								<span th:text="'$'+${item.price}"></span>
+						</div>
+					</div>
+				</th:block>
+
+			</div>
+		</div>
+	</div>
+	<!-- end products -->
+
+	<div th:replace="fragments/footer"></div>
+	<div th:replace="fragments/query"></div>
+
+</body>
+</html>
