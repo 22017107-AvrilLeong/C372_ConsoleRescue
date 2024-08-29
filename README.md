@@ -15,3 +15,7 @@ Pay for your items using your own Paypal account! (sandbox)
 
 # Credits
 HTML Template Used : https://imransdesign.com/project/fruitkha/
+Images Taken: https://retrogamerepairshop.com
+
+# Screenshot
+<img src="src/main/resources/static/images/screenshot.png" alt="Homepage Screenshot" width="800"/>
