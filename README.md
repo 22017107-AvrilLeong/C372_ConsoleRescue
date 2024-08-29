@@ -12,3 +12,6 @@ Pay for your items using your own Paypal account! (sandbox)
 # IMPORTANT
 1. **You have to have your own Email Address in application.properties**
 2. **In cart.html, input your own PayPalAPI Key**
+
+# Credits
+HTML Template Used : https://imransdesign.com/project/fruitkha/
